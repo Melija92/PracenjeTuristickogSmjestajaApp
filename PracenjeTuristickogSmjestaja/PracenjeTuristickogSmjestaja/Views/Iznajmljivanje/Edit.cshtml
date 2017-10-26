@@ -1,0 +1,58 @@
+﻿@model PracenjeTuristickogSmjestaja.ViewModels.IznajmljivanjeViewModel
+@{
+    ViewBag.Title = "Iznajmljivanje";
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/mm/yy",
+                changeDay: true,
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+        });
+    </script>
+}
+<div class="row" style="margin-left:10%">
+    <div class="col-md-6">
+        <h3>Dodaj novo iznajmljivanje</h3>
+        <p>Poveži OIB turista s jedinicom iznajmljivanja u kojoj će boraviti</p>
+        <div class="jumbotron">
+            @using (Html.BeginForm("Create", "Iznajmljivanje", FormMethod.Post, new { name = "iznajmljivanje_forma" }))
+            {
+                @Html.HiddenFor(a => a.sifra_iznajmljivanja)
+                <div class="form-group">
+                    @Html.LabelFor(a => a.sifra_turista)
+                    @Html.DropDownListFor(a => a.sifra_turista, new SelectList(Model.Turisti, "sifra_turista", "OIB_turista"), "Izaberi OIB turista", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.sifra_turista)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.sifra_jedinice_iznajmljivanja)
+                    @Html.DropDownListFor(a => a.sifra_jedinice_iznajmljivanja, new SelectList(Model.JediniceIznajmljivanja, "sifra_jedinice_iznajmljivanja", "broj_jedinice_iznajmljivanja"), "Izaberi jedinicu iznajmljivanja", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.sifra_jedinice_iznajmljivanja)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.PocetakIznajmljivanja)
+                    @Html.TextBoxFor(a => a.PocetakIznajmljivanja, new { @class = "form-control", type = "datetime" })
+                    @Html.ValidationMessageFor(a => a.PocetakIznajmljivanja)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.ZavrsetakIznajmljivanja)
+                    @Html.TextBoxFor(a => a.ZavrsetakIznajmljivanja, new { @class = "form-control", type = "datetime" })
+                    @Html.ValidationMessageFor(a => a.ZavrsetakIznajmljivanja)
+                </div>
+                <button type="submit" value="save" class="btn btn-primary" onclick="return IznajmljivanjeValidacija()">Spremi</button>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "Iznajmljivanje")'" />
+        @Html.Partial("~/Views/Shared/Linkovi.cshtml")
+    </div>
+</div>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Naslovna stranica";
+}
+
+<div class="jumbotron">
+    <h2 style="text-align: center">Dobrodošli na stranicu za praćenje popunjenosti turističkog smještaja</h2>
+    <div class="row">
+        <div class="col-md-4"><img src="../Slike/more.jpg" class="img-thumbnail" alt="more"></div>
+        <div class="col-md-4"><img src="../Slike/plitvicka jezera.jpg" class="img-thumbnail" alt="plitvicka jezera"></div>
+        <div class="col-md-4"><img src="../Slike/kopacki rit.jpg" class="img-thumbnail" alt="Slika 1"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" style="padding-top : 20px;">
+            <p class="lead">Ovo je stranica koja služi za organizaciju svega vezanoga za praćenje turističkog smještaja i objekata u kojima turisti borave.</p>
+            <p>Moguće je unijeti novoga turista, povezati ga s mjestom gdje će boraviti tijekom svog turističkog boravišta, unositi nove objekte te ih povezati s njihovim vlasnicima te pregledavati iste.</p>
+        </div>
+        <div class="col-md-6" style="padding-top : 20px;">
+            <p>Web aplikacija temeljena je na ASP.NET MVC tehnologijama koristeći C# kao jezik na serveskoj strani uz pomoć Entity Frameworka za komuniciranje s bazom podataka.</p>
+            <p>Na klijentskoj strani korištene su sljedeće tehnologije: HTML, CSS, Bootstrap te Javascript.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"><a href='@Url.Action("Index", "Turist")'><img class="img-thumbnail" src='@Url.Content("../Slike/turist.png" )' /></a><p align="center" class="ikone-font">Turist</p></div>
+        <div class="col-md-2"><a href='@Url.Action("Index", "Iznajmljivanje")'><img class="img-thumbnail" src='@Url.Content("../Slike/iznajmljivanje.png" )' /></a><p align="center" class="ikone-font">Iznajmljivanje</p></div>
+        <div class="col-md-2"><a href='@Url.Action("Index", "Objekt")'><img class="img-thumbnail" src='@Url.Content("../Slike/objekt_iznajmljivanja.png" )' /></a><p align="center" class="ikone-font">Objekt iznajmljivanja</p></div>
+        <div class="col-md-2"><a href='@Url.Action("Index", "JedinicaIznajmljivanja")'><img class="img-thumbnail" src='@Url.Content("../Slike/jedinica_iznajmljivanja.png" )' /></a><p align="center" class="ikone-font">Jedinica iznajmljivanja</p></div>
+        <div class="col-md-2"><a href='@Url.Action("Index", "Vlasnik")'><img class="img-thumbnail" src='@Url.Content("../Slike/vlasnik.png" )' /></a><p align="center" class="ikone-font">Vlasnik</p></div>
+        <div class="col-md-2"><a href='@Url.Action("Index", "Vlasnistvo")'><img class="img-thumbnail" src='@Url.Content("../Slike/vlasnistvo.png" )' /></a><p align="center" class="ikone-font">Vlasništvo</p></div>
+    </div>
+</div>

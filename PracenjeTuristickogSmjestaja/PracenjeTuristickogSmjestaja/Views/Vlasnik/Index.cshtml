@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PracenjeTuristickogSmjestaja.Models.Vlasnik>
+
+@{
+    ViewBag.Title = "Index";
+}
+@{var i = 0; }
+<input class="gumbovi btn btn-default" type="button" value="Dodaj vlasnika" onclick="location.href='@Url.Action("Create", "Vlasnik")'" />
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            OIB vlasnika
+        </th>
+        <th>
+            Ime i prezime
+        </th>
+        <th>
+            Državljanstvo
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        i += 1;
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OIB_vlasnika)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ime) @Html.DisplayFor(modelItem => item.Prezime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Drzavljanstvo.NazivDrzavljanstva)
+            </td>
+        </tr>
+    }
+
+</table>
+<p>Ukupno zapisa: @i</p>

@@ -1,0 +1,93 @@
+﻿@model PracenjeTuristickogSmjestaja.ViewModels.StatistikaViewModel
+@{
+    ViewBag.Title = "Statistika objekata";
+}
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Dodaj iznajmljivanje" onclick="location.href='@Url.Action("Create", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Prikaži akutalne" onclick="location.href='@Url.Action("Aktualni", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Statistika objekata" onclick="location.href='@Url.Action("StatistikaObjekti", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-4">
+    <p class="opisTablica">Broj turista po spolu</p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Spol
+            </th>
+            <th>
+                Broj
+            </th>
+        </tr>
+        @foreach (var item in Model.Spolovi)
+            {
+            <tr>
+                <td>
+                    @item.nazivSpola
+                </td>
+                <td>
+                    @item.Broj
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
+
+<div class="col-md-4">
+    <p class="opisTablica">Broj turista po mjestu turističkog smještaja</p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Naziv mjesta
+            </th>
+            <th>
+                Broj turista
+            </th>
+        </tr>
+        @foreach (var item in Model.Mjesta)
+        {
+            <tr>
+                <td>
+                    @item.Naziv
+                </td>
+                <td>
+                    @item.Broj
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
+<div class="col-md-4">
+    <p class="opisTablica">Broj turista po državljanstvu</p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Naziv mjesta
+            </th>
+            <th>
+                Broj turista
+            </th>
+        </tr>
+        @foreach (var item in Model.Drzavljanstva)
+            {
+            <tr>
+                <td>
+                    @item.Naziv
+                </td>
+                <td>
+                    @item.Broj
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>
+

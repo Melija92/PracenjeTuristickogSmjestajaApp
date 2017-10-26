@@ -1,0 +1,131 @@
+﻿@model PracenjeTuristickogSmjestaja.ViewModels.StatistikaViewModel
+@using PracenjeTuristickogSmjestaja.ViewModels
+@{
+    ViewBag.Title = "Statistika objekata";
+}
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Dodaj iznajmljivanje" onclick="location.href='@Url.Action("Create", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Prikaži akutalne" onclick="location.href='@Url.Action("Aktualni", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Statistika turista" onclick="location.href='@Url.Action("StatistikaTuristi", "Iznajmljivanje")'" />
+</div>
+
+
+    <div class="col-md-3">
+        <p class="opisTablica">Popunjenost po tipu objekta</p>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Naziv mjesta
+                </th>
+                <th>
+                    Broj turista
+                </th>
+            </tr>
+            @foreach (var item in Model.TipObjekata)
+            {
+                <tr>
+                    <td>
+                        @item.Naziv
+                    </td>
+                    <td>
+                        @item.Broj
+                    </td>
+                </tr>
+
+            }
+        </table>
+        <br />
+    </div>
+
+    <div class="col-md-3">
+        <p class="opisTablica">Popunjenost po vrsti iznajmljivača</p>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Naziv mjesta
+                </th>
+                <th>
+                    Broj turista
+                </th>
+            </tr>
+            @foreach (var item in Model.TipIznajmljivaca)
+            {
+                <tr>
+                    <td>
+                        @item.Naziv
+                    </td>
+                    <td>
+                        @item.Broj
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+@{var trenutnaPopunjenostViewModelZaListu = new List<TrenutnaPopunjenostViewModel>(); }
+@foreach (var item in Model.TrenutnaPopunjenost)
+{
+    var trenutnaPopunjenostViewModel = new TrenutnaPopunjenostViewModel();
+    trenutnaPopunjenostViewModel.naziv = item.naziv;
+    trenutnaPopunjenostViewModel.trenutnaPopunjenost = item.trenutnaPopunjenost;
+    trenutnaPopunjenostViewModelZaListu.Add(trenutnaPopunjenostViewModel);
+}
+<div class="col-md-6">
+    <p class="opisTablica">Popunjenost ukupnog kapaciteta objekata</p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Broj objekta
+            </th>
+            <th>
+                Ukupan kapacitet
+            </th>
+            <th>
+                Trenutno turista
+            </th>
+            <th>
+                % popunjenosti
+            </th>
+        </tr>
+        @foreach (var item in Model.Popunjenost)
+            {
+            <tr>
+                <td>
+                    @item.sifra_objekta
+                </td>
+                <td>
+                    @item.MaxBroj
+                </td>
+                @{var i = 0;}
+                @foreach (var trenutnaPopunjenost in trenutnaPopunjenostViewModelZaListu)
+                {
+
+                    if (item.sifra_objekta == trenutnaPopunjenost.naziv)
+                    {
+                        <td>@trenutnaPopunjenost.trenutnaPopunjenost</td>
+                        var postotak = Math.Round(((float)trenutnaPopunjenost.trenutnaPopunjenost / (float)item.MaxBroj) * 100, 2);
+                        <td>@postotak%</td>
+                    }
+                    else
+                    {
+                        i++;
+                        if (trenutnaPopunjenostViewModelZaListu.Count() == i)
+                        {
+                            <td>0</td>
+                            <td>0%</td>
+                        }
+                    }
+                }
+
+            </tr>
+            }
+    </table>
+</div>
+

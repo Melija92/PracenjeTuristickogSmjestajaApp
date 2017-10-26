@@ -1,0 +1,50 @@
+﻿@model IEnumerable<PracenjeTuristickogSmjestaja.ViewModels.JedinicaIznajmljivanjaViewModel>
+
+@{
+    ViewBag.Title = "Iznajmjivanja";
+}
+@section scripts{
+
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+}
+<div style="margin-top: 30px;">
+    <p>Prikazna su sve jedinice iznajmljivanja za ovaj objekt</p>
+    @{int i = 0; }
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>
+                Jedinica
+            </th>
+            <th>
+                Maksimalan broj ljudi
+            </th>
+            <th>
+                Dnevna cijena
+            </th>
+            <th>
+                Razina luksuznosti
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            i += 1;
+            <tr>
+                <td>
+                    @item.jedinica_iznajmljivanja
+                </td>
+                <td>
+                    @item.MaksimalanBrojLjudi
+                </td>
+                <td>
+                    @item.DnevnaCijena
+                </td>
+                <td>
+                    @item.RazinaLuksuznosti
+                </td>
+            </tr>
+        }
+    </table>
+    <p>Ukupno zapisa: @i</p>
+</div>

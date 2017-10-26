@@ -1,0 +1,56 @@
+﻿@model IEnumerable<PracenjeTuristickogSmjestaja.Models.JedinicaIznajmljivanja>
+
+@{
+    ViewBag.Title = "Jedinice iznajmljivanja";
+}
+<input class="gumbovi btn btn-default" type="button" value="Dodaj jedinicu iznajmljivanja" onclick="location.href='@Url.Action("Create", "JedinicaIznajmljivanja")'" />
+@{var i = 0; }
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Šifranik jedinica - objekt
+        </th>
+        <th>
+            Objekt
+        </th>
+        <th>
+            Mjesto
+        </th>
+        <th>
+            Maks. broj ljudi
+        </th>
+        <th>
+            Dnevna cijena
+        </th>
+        <th>
+            Razina luksuza
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        i += 1;
+        <tr>
+            <td>
+                @item.broj_jedinice_iznajmljivanja - @item.Objekt.broj_objekta_iznajmljivanja
+            </td>
+            <td>
+                @item.Objekt.Adresa - @item.Objekt.naziv
+            </td>
+            <td>
+                @item.Objekt.Mjesto.NazivMjesta
+            </td>
+            <td>
+                @item.MaksimalanBrojLjudi
+            </td>
+            <td>
+                @item.DnevnaCijena kn
+            </td>
+            <td>
+                @item.RazinaLuksuznosti
+            </td>
+        </tr>
+    }
+
+</table>
+<p>Ukupno zapisa: @i</p>

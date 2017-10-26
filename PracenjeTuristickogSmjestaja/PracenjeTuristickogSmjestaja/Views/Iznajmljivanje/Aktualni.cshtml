@@ -1,0 +1,80 @@
+﻿@model IEnumerable<PracenjeTuristickogSmjestaja.Models.Iznajmljivanje>
+
+@{
+    ViewBag.Title = "Iznajmjivanja";
+}
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Dodaj iznajmljivanje" onclick="location.href='@Url.Action("Create", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Statistika objekata" onclick="location.href='@Url.Action("StatistikaObjekti", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Statistika turista" onclick="location.href='@Url.Action("StatistikaTuristi", "Iznajmljivanje")'" />
+</div>
+<p>Prikazna su samo trenutno aktualni turistički smještaji čime je današnji datum između datuma početka i završetka iznajmljivanja</p>
+@{int i = 0; }
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Jedinica - objekt
+        </th>
+        <th>
+            Naziv
+        </th>
+        <th>
+            Mjesto
+        </th>
+        <th>
+            OIB turista
+        </th>
+        <th>
+            Turist
+        </th>
+        <th>
+            Starost
+        </th>
+        <th>
+            Početak i završetak iznajmljivanja
+        </th>
+        <th>
+            Dnevna cijena
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        i += 1;
+        <tr>
+            <td>
+                @item.JedinicaIznajmljivanja.broj_jedinice_iznajmljivanja - @item.JedinicaIznajmljivanja.Objekt.broj_objekta_iznajmljivanja
+            </td>
+            <td>
+                @item.JedinicaIznajmljivanja.Objekt.naziv
+            </td>
+            <td>
+                @item.JedinicaIznajmljivanja.Objekt.Mjesto.NazivMjesta
+            </td>
+            <td>
+                @item.Turist.OIB_turista
+            </td>
+            <td>
+                @item.Turist.Ime @item.Turist.Prezime
+            </td>
+            <td>
+                @(DateTime.Now.Year - item.Turist.DatumRodenja.Year) god.
+            </td>
+            <td>
+                @item.PocetakIznajmljivanja.Day.@item.PocetakIznajmljivanja.Month.@item.PocetakIznajmljivanja.Year. -
+                @item.ZavrsetakIznajmljivanja.Day.@item.ZavrsetakIznajmljivanja.Month.@item.ZavrsetakIznajmljivanja.Year.
+            </td>
+            <td>
+                @item.JedinicaIznajmljivanja.DnevnaCijena kn
+            </td>
+        </tr>
+    }
+</table>
+<p>Ukupno zapisa: @i</p>

@@ -1,0 +1,96 @@
+﻿@model IEnumerable<PracenjeTuristickogSmjestaja.Models.Iznajmljivanje>
+
+@{
+    ViewBag.Title = "Iznajmjivanja";
+}
+@section scripts{
+
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+}
+
+<div class="col-md-3">
+<input class="gumbovi btn btn-default" type="button" value="Dodaj iznajmljivanje" onclick="location.href='@Url.Action("Create", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+<input class="gumbovi btn btn-default" type="button" value="Prikaži aktualne" onclick="location.href='@Url.Action("Aktualni", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Statistika objekata" onclick="location.href='@Url.Action("StatistikaObjekti", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-3">
+    <input class="gumbovi btn btn-default" type="button" value="Statistika turista" onclick="location.href='@Url.Action("StatistikaTuristi", "Iznajmljivanje")'" />
+</div>
+    <p>Prikazna je cijela povijest svih turističkih dolazaka</p>
+ @{int i = 0; }
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Jedinica - objekt
+        </th>
+        <th>
+            Naziv
+        </th>
+        <th>
+            Mjesto
+        </th>
+        <th>
+            OIB turista
+        </th>
+        <th>
+            Turist
+        </th>
+        <th>
+            Starost
+        </th>
+        <th>
+            Početak i završetak iznajmljivanja
+        </th>
+        <th>
+            Dnevna cijena
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        i += 1;
+        <tr>
+            <td>
+                @item.JedinicaIznajmljivanja.broj_jedinice_iznajmljivanja - @item.JedinicaIznajmljivanja.Objekt.broj_objekta_iznajmljivanja
+            </td>
+            <td>
+                @item.JedinicaIznajmljivanja.Objekt.naziv
+            </td>
+            <td>
+                @item.JedinicaIznajmljivanja.Objekt.Mjesto.NazivMjesta
+            </td>
+            <td>
+                @item.Turist.OIB_turista
+            </td>
+            <td>
+                @item.Turist.Ime @item.Turist.Prezime
+            </td>
+            <td>
+                @(DateTime.Now.Year - item.Turist.DatumRodenja.Year) god.
+            </td>
+            <td>
+                @item.PocetakIznajmljivanja.Day.@item.PocetakIznajmljivanja.Month.@item.PocetakIznajmljivanja.Year. -
+                @item.ZavrsetakIznajmljivanja.Day.@item.ZavrsetakIznajmljivanja.Month.@item.ZavrsetakIznajmljivanja.Year.
+            </td>
+            <td>
+                @item.JedinicaIznajmljivanja.DnevnaCijena kn
+            </td>
+            <td>
+                <a href='@Url.Action("Edit", "Iznajmljivanje", new { sifra_iznajmljivanja = item.sifra_iznajmljivanja,
+                        sifra_turista = item.sifra_turista, sifra_jedinice_iznajljivanja = item.sifra_jedinice_iznajmljivanja})'>
+                <img class="img-thumbnail" src='@Url.Content("../Slike/editing.png" )' /></a>
+                <a data-ajax="true" data-ajax-method="POST" href="/Turist/Delete/@item.sifra_turista">
+                    <img class="img-thumbnail" src='@Url.Content("../Slike/brisanje.png" )' />
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+    <p>Ukupno zapisa: @i</p>

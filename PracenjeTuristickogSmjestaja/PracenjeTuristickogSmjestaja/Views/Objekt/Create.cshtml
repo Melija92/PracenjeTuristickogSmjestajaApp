@@ -1,0 +1,61 @@
+﻿@model PracenjeTuristickogSmjestaja.ViewModels.ObjektViewModel
+@{
+    ViewBag.Title = "Objekt iznajmljivanja";
+}
+
+
+<div class="row" style="margin-left:10%">
+    <div class="col-md-6">
+        <h3>Unesi novi objekt iznajmljivanja</h3>
+        <p>Forma za unos novog objekta iznajmljivanja koji sadrži više jedinica izanajmljivanja (hotel, kuća s apartmanima, kamp polja, kruzeri...)</p>
+        <div class="jumbotron">
+            @using (Html.BeginForm("Create", "Objekt", FormMethod.Post, new { name = "objekt_forma" }))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(a => a.objekt_iznajmljivanja)
+                    @Html.TextBoxFor(a => a.objekt_iznajmljivanja, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(a => a.objekt_iznajmljivanja)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.naziv)
+                    @Html.TextBoxFor(a => a.naziv, new { @class = "form-control", placeholder = "Naziv nije obvezan" })
+                    @Html.ValidationMessageFor(a => a.naziv)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.Adresa)
+                    @Html.TextBoxFor(a => a.Adresa, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.Adresa)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.PostanskiBroj)
+                    @Html.TextBoxFor(a => a.PostanskiBroj, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.PostanskiBroj)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.sifra_tipa_objekta)
+                    @Html.DropDownListFor(a => a.sifra_tipa_objekta, new SelectList(Model.TipoviObjekta, "sifra_tipa_objekta", "NazivTipaObjekta"), "Izaberi tip objekta", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.sifra_tipa_objekta)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.sifra_tipa_iznajmljivaca)
+                    @Html.DropDownListFor(a => a.sifra_tipa_iznajmljivaca, new SelectList(Model.TipoviIznajmljivaca, "sifra_tipa_iznajmljivaca", "NazivTipaIznajmljivaca"), "Izaberi tip iznajmljivača", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.sifra_tipa_iznajmljivaca)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.sifra_mjesta)
+                    @Html.DropDownListFor(a => a.sifra_mjesta, new SelectList(Model.Mjesta, "sifra_mjesta", "NazivMjesta"), "Izaberi mjesto", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.sifra_mjesta)
+                </div>
+                <button type="submit" value="save" class="btn btn-primary">Spremi</button>
+                if (TempData["Success"] != null)
+                {
+                    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "Objekt")'" />
+        @Html.Partial("~/Views/Shared/Linkovi.cshtml")
+    </div>
+</div>

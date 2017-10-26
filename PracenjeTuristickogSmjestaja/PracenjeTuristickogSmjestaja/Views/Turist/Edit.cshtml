@@ -1,0 +1,80 @@
+﻿@using PracenjeTuristickogSmjestaja.ViewModels
+@model TuristViewModel
+
+@{
+    ViewBag.Title = "Turist";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryui")
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "dd/mm/yy",
+                changeDay: true,
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+
+        });
+    </script>  
+}
+
+<div class="row" style="margin-left:10%">
+    <div class="col-md-6">
+        <h3>Unesi novog turista</h3>
+        <p>Turist je osoba koja iznajmljuje neki turistički objekt</p>
+        <div class="jumbotron">
+
+            @using (Html.BeginForm("Edit", "Turist", FormMethod.Post, new { name = "turist_forma" }))
+            {
+                @Html.HiddenFor(a => a.sifra_turista)
+                <div class="form-group">
+                    @Html.LabelFor(a => a.OIB_turista)
+                    @Html.TextBoxFor(a => a.OIB_turista, new { @class = "form-control", autofocus = "autofocus", placeholder = "npr. 87481127945" })
+                    @Html.ValidationMessageFor(a => a.OIB_turista)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.Ime)
+                    @Html.TextBoxFor(a => a.Ime, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(a => a.Ime)
+                </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Prezime)
+                        @Html.TextBoxFor(a => a.Prezime, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.Prezime)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.DatumRodenja)
+                        @Html.TextBoxFor(a => a.DatumRodenja, new { @class = "form-control", type = "datetime" })
+                        @Html.ValidationMessageFor(a => a.DatumRodenja)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.Spol)
+                        <br />
+                        @Html.RadioButtonFor(a => a.Spol, "M", false)@Html.Label("Muški", new { @class = "radio-button" })
+                        @Html.RadioButtonFor(a => a.Spol, "Z", false)@Html.Label("Ženski", new { @class = "radio-button" })
+                        @Html.ValidationMessageFor(a => a.Spol)
+                    </div>
+                    <div class="form-group">
+                        Mjesto
+                        @Html.DropDownList("sifra_mjesta", null, "Izaberi mjesto", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.sifra_mjesta)
+                    </div>
+                    <div class="form-group">
+                        Državljanstvo
+                        @Html.DropDownList("sifra_drzavljanstva", null, "Izaberi državljanstvo", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.sifra_drzavljanstva)
+                    </div>
+                    <button type="submit" value="save" class="btn btn-primary" onclick="return TuristValidacija()">Spremi</button>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "Turist")'" />
+        @Html.Partial("~/Views/Shared/Linkovi.cshtml")
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<PracenjeTuristickogSmjestaja.Models.Objekt>
+
+@{
+    ViewBag.Title = "Objekti";
+}
+@section scripts{
+
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+}
+@{var i = 0; }
+<input class="gumbovi btn btn-default" type="button" value="Dodaj objekt" onclick="location.href='@Url.Action("Create", "Objekt")'" />
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Broj objekta
+        </th>
+        <th>
+            Tip objekta
+        </th>
+        <th>
+            Naziv
+        </th>
+        <th>
+            Mjesto
+        </th>
+        <th>
+            Adresa
+        </th>
+        <th>
+            Poštanski broj
+        </th>
+        <th>
+            Tip iznajmljivača
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        i += 1;
+        <tr>
+            <td>
+                @item.broj_objekta_iznajmljivanja
+            </td>
+            <td>
+                @item.TipObjekta.NazivTipaObjekta
+            </td>
+            <td>
+                @item.naziv
+            </td>
+            <td>
+                @item.Mjesto.NazivMjesta
+            </td>
+            <td>
+                @item.Adresa
+            </td>
+            <td>
+                @item.PostanskiBroj
+            </td>
+
+            <td>
+                @item.TipIznajmljivaca.NazivTipaIznajmljivaca
+            </td>
+            <td>
+                <center>
+                    <a href='@Url.Action("Details", "Objekt", new { id = item.sifra_objekta })'><img class="img-thumbnail" src='@Url.Content("../Slike/detalji.png" )' /></a>
+                    <a href='@Url.Action("Edit", "Objekt", new { id = item.sifra_objekta })'><img class="img-thumbnail" src='@Url.Content("../Slike/editing.png" )' /></a>
+
+                    <a data-ajax="true" data-ajax-method="POST" href="/Objekt/Delete/@item.sifra_objekta">
+                        <img class="img-thumbnail" src='@Url.Content("../Slike/brisanje.png" )' />
+                    </a>
+                </center>
+            </td>
+        </tr>
+    }
+
+</table>
+<p>Ukupno zapisa: @i</p>

@@ -1,0 +1,39 @@
+﻿@model PracenjeTuristickogSmjestaja.ViewModels.VlasnistvoViewModel
+@{
+    ViewBag.Title = "Vlasnistvo";
+}
+<div class="row" style="margin-left:10%">
+    <div class="col-md-6">
+        <h3>Unesi novo vlasništvo</h3>
+        <p>Prilikom unosom vlasništva, OIB vlasnika povezuje se s šifrom objekta nad kojim ima dio ili poptpuno vlasništvo</p>
+        <div class="jumbotron">
+
+            @using (Html.BeginForm("Create", "vlasnistvo"))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(a => a.OIB_v)
+                    @Html.DropDownListFor(a => a.OIB_v, new SelectList(Model.Vlasnici, "sifra_vlasnika", "OIB_vlasnika"), "Izaberi vlasnika", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.OIB_v)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.sifra_objekta)
+                    @Html.DropDownListFor(a => a.sifra_objekta, new SelectList(Model.Objekti, "sifra_objekta", "broj_objekta_iznajmljivanja"), "Izaberi objekt", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.sifra_objekta)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.UdioUVlasnistvu)
+                    @Html.TextBoxFor(a => a.UdioUVlasnistvu, new { @class = "form-control" })
+                </div>
+                <button type="submit" value="save" class="btn btn-primary">Spremi</button>
+                if (TempData["Success"] != null)
+                {
+                    <p class="alert alert-success" id="successMessage">@TempData["Success"]</p>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "Vlasnistvo")'" />
+        @Html.Partial("~/Views/Shared/Linkovi.cshtml")
+    </div>
+</div>

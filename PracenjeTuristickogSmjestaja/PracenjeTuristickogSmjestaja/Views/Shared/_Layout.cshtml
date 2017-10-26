@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Praćenje popunjenosti turističkog smještaja", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 18px;" ;>Prečaci za unose<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Unesi turista", "Create", "Turist", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Unesi iznajmljivanje", "Create", "Iznajmljivanje", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Unesi objekt iznajmljivanja", "Create", "Objekt", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Unesi jedinicu iznajmljivanja", "Create", "JedinicaIznajmljivanja", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Unesi vlasnika", "Create", "Vlasnik", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Unesi vlasništvo", "Create", "Vlasnistvo", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 18px;" ;>Prečaci za preglede<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Pregled turista", "Index", "Turist", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Pregled iznajmljivanja", "Index", "Iznajmljivanje", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Pregled objekata", "Index", "Objekt", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Pregled jednica iznajmljivanja", "Index", "JedinicaIznajmljivanja", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Pregled vlasnika", "Index", "Vlasnik", new { area = "" }, new { @class = "navbar-brand" })</li>
+                            <li>@Html.ActionLink("Pregled vlasništva", "Index", "Vlasnistvo", new { area = "" }, new { @class = "navbar-brand" })</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer align="center">
+            <p>@DateTime.Now.Year - Praćenje popunjenosti turističkog smještaja</p>
+            <p>Stranica i slike su ilustrativne te služe samo kao primjer web aplikacije u svrhu izrade završnog rada</p>
+            <p>Aplikaciju izradio - Sučić Domagoj</p>
+    </footer>
+    </div>
+    <script type="text/javascript" src="@Url.Content("/Scripts/validacije.js")"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

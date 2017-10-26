@@ -1,0 +1,50 @@
+﻿@model IEnumerable<PracenjeTuristickogSmjestaja.Models.Vlasnistvo>
+
+@{
+    ViewBag.Title = "Vlasništva";
+}
+<input class="gumbovi btn btn-default" type="button" value="Dodaj vlasništvo" onclick="location.href='@Url.Action("Create", "Vlasnistvo")'" />
+@{int i = 0; }
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Objekt iznajmljivanja
+        </th>
+        <th>
+            Adresa
+        </th>
+        <th>
+            OIB vlasnika
+        </th>
+        <th>
+            Ime i prezime
+        </th>
+        <th>
+            % udjela u vlasništvu
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        i += 1;
+        <tr>
+            <td>
+                @item.Objekt.broj_objekta_iznajmljivanja
+            </td>
+            <td>
+                @item.Objekt.Adresa - @item.Objekt.naziv
+            </td>
+            <td>
+                @item.Vlasnik.OIB_vlasnika
+            </td>
+            <td>
+                @item.Vlasnik.Ime @item.Vlasnik.Prezime
+            </td>
+            <td>
+                @item.UdioUVlasnistvu %
+            </td>
+        </tr>
+    }
+
+</table>
+<p>Ukupno zapisa: @i</p>

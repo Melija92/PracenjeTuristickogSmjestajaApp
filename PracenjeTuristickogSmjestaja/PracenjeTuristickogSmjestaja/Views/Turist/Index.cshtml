@@ -1,0 +1,74 @@
+﻿@model IEnumerable<PracenjeTuristickogSmjestaja.Models.Turist>
+
+@{
+    ViewBag.Title = "Turisti";
+}
+@{var i = 0; }
+
+
+
+@section scripts{
+
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+}
+
+<input class="gumbovi btn btn-default" type="button" value="Dodaj turista" onclick="location.href='@Url.Action("Create", "Turist")'" />
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            OIB
+        </th>
+        <th>
+            Ime i prezime
+        </th>
+        <th>
+            Datum rođenja
+        </th>
+        <th>
+            Spol
+        </th>
+        <th>
+            Mjesto prebivališta
+        </th>
+        <th>
+            Državljanstvo
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        i += 1;
+        <tr>
+            <td>
+                @item.OIB_turista
+            </td>
+            <td>
+                @item.Ime @item.Prezime
+            </td>
+            <td>
+                @item.DatumRodenja.Day.@item.DatumRodenja.Month.@item.DatumRodenja.Year
+            </td>
+            <td>
+                @item.Spol
+            </td>
+            <td>
+                @item.Mjesto.NazivMjesta
+            </td>
+            <td>
+                @item.Drzavljanstvo.NazivDrzavljanstva
+            </td>
+            <td>
+                <center>
+                    <a href='@Url.Action("Edit", "Turist", new { id = item.sifra_turista })'><img class="img-thumbnail" src='@Url.Content("../Slike/editing.png" )' /></a>
+                    
+                    <a data-ajax="true" data-ajax-method="POST" href="/Turist/Delete/@item.sifra_turista">
+                        <img class="img-thumbnail" src='@Url.Content("../Slike/brisanje.png" )' />
+                    </a>
+                </center>
+            </td>
+        </tr>
+    }
+</table>
+<p>Ukupno zapisa: @i</p>
+
