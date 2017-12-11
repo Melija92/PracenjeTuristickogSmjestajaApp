@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace PracenjeTuristickogSmjestaja.Controllers
 {
+    [Authorize]
     public class IznajmljivanjeController : Controller
     {
         private readonly ApplicationDbContext _context_iznajmljivanje;
@@ -125,6 +126,7 @@ namespace PracenjeTuristickogSmjestaja.Controllers
             viewmodel.Drzavljanstva = drzavljanstva;
             return View(viewmodel);
         }
+        [Authorize]
         public ActionResult Create()
         {
             var viewModel = new IznajmljivanjeViewModel()
@@ -158,6 +160,7 @@ namespace PracenjeTuristickogSmjestaja.Controllers
             TempData["Success"] = "Uspješno spremljeno!";
             return RedirectToAction("Create", "Iznajmljivanje");
         }
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace PracenjeTuristickogSmjestaja.Controllers
 {
+    [Authorize]
     public class JedinicaIznajmljivanjaController : Controller
     {
         private readonly ApplicationDbContext _context_jedinica_iznajmljivanja;

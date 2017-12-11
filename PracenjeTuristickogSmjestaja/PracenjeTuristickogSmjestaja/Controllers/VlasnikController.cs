@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace TelefonskiImenik.Controllers
 {
+    [Authorize]
     public class VlasnikController : Controller
     {
 

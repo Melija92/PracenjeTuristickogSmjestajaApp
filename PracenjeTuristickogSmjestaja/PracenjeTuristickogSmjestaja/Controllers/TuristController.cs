@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace TelefonskiImenik.Controllers
 {
+    [Authorize]
     public class TuristController : Controller
     {
 
@@ -109,7 +110,7 @@ namespace TelefonskiImenik.Controllers
             _context_turist.SaveChanges();
             return RedirectToAction("Index", "Turist");
         }
-
+        
         [HttpPost]
         public ActionResult Delete(int id)
         {
