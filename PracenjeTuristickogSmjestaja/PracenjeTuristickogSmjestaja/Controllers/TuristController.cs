@@ -59,7 +59,7 @@ namespace TelefonskiImenik.Controllers
             _context_turist.Turist.Add(turist);
             _context_turist.SaveChanges();
 
-            TempData["Success"] = "Uspješno spremljeno!";
+            TempData["Success"] = "Uspješno spremnjeno!";
             return RedirectToAction("Create", "Turist");
         }
 
@@ -117,6 +117,7 @@ namespace TelefonskiImenik.Controllers
             var turist = _context_turist.Turist.Find(id);
             _context_turist.Turist.Remove(turist);
             _context_turist.SaveChanges();
+
             return RedirectToAction("Index", "Home");
         }
     }

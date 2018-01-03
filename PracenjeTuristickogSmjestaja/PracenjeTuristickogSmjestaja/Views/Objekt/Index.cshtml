@@ -8,6 +8,7 @@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 
 }
+<script src="~/Scripts/brisanje.js"></script>
 @{var i = 0; }
 <input class="gumbovi btn btn-default" type="button" value="Dodaj objekt" onclick="location.href='@Url.Action("Create", "Objekt")'" />
 <table class="table table-bordered table-hover">
@@ -65,7 +66,8 @@
                     <a href='@Url.Action("Details", "Objekt", new { id = item.sifra_objekta })'><img class="img-thumbnail" src='@Url.Content("../Slike/detalji.png" )' /></a>
                     <a href='@Url.Action("Edit", "Objekt", new { id = item.sifra_objekta })'><img class="img-thumbnail" src='@Url.Content("../Slike/editing.png" )' /></a>
 
-                    <a data-ajax="true" data-ajax-method="POST" href="/Objekt/Delete/@item.sifra_objekta">
+                    <a data-ajax="true" data-ajax-method="POST" href="/Objekt/Delete/@item.sifra_objekta"
+                       onclick="setTimeout(brisanje, 200);">
                         <img class="img-thumbnail" src='@Url.Content("../Slike/brisanje.png" )' />
                     </a>
                 </center>

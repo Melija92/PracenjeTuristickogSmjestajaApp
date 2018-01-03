@@ -6,6 +6,7 @@ namespace PracenjeTuristickogSmjestaja.ViewModels
 {
     public class JedinicaIznajmljivanjaViewModel
     {
+        public int sifra_jedinice_iznajmljivanja { get; set; }
         [Display(Name = "Šifra jedinice iznajmljivanja")]
         [Required(ErrorMessage = "Šifra jedinice iznajmljivanja je obvezna za unos")]
         public string jedinica_iznajmljivanja { get; set; }

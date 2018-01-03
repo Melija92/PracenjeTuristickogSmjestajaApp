@@ -58,7 +58,7 @@ namespace PracenjeTuristickogSmjestaja.Controllers
             _context_objekt.Objekt.Add(objekt);
             _context_objekt.SaveChanges();
 
-            TempData["Success"] = "Uspješno spremljeno!";
+            TempData["Success"] = "Uspješno spremnjeno!";
             return RedirectToAction("Create", "Objekt");
         }
         public ActionResult Details(int? id)
@@ -95,7 +95,7 @@ namespace PracenjeTuristickogSmjestaja.Controllers
                 sifra_tipa_iznajmljivaca = objekt.sifra_tipa_iznajmljivaca,
                 sifra_tipa_objekta = objekt.sifra_tipa_objekta
             };
-            ViewBag.sifra_mjesta = new SelectList(_context_objekt.Mjesto, "sifra_mjesta", "NazivMjesta", objekt.sifra_objekta);
+            ViewBag.sifra_mjesta = new SelectList(_context_objekt.Mjesto, "sifra_mjesta", "NazivMjesta", objekt.sifra_mjesta);
             ViewBag.sifra_tipa_iznajmljivaca = new SelectList(_context_objekt.TipIznajmljivaca, "sifra_tipa_iznajmljivaca", "NazivTipaIznajmljivaca", objekt.sifra_tipa_iznajmljivaca);
             ViewBag.sifra_tipa_objekta = new SelectList(_context_objekt.TipObjekta, "sifra_tipa_objekta", "NazivTipaObjekta", objekt.sifra_tipa_objekta);
             return View(objektViewModel);

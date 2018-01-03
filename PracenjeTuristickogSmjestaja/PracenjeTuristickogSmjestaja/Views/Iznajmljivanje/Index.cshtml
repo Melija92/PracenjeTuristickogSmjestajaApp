@@ -8,12 +8,12 @@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 
 }
-
+<script src="~/Scripts/brisanje.js"></script>
 <div class="col-md-3">
-<input class="gumbovi btn btn-default" type="button" value="Dodaj iznajmljivanje" onclick="location.href='@Url.Action("Create", "Iznajmljivanje")'" />
+    <input class="gumbovi btn btn-default" type="button" value="Dodaj iznajmljivanje" onclick="location.href='@Url.Action("Create", "Iznajmljivanje")'" />
 </div>
 <div class="col-md-3">
-<input class="gumbovi btn btn-default" type="button" value="Prikaži aktualne" onclick="location.href='@Url.Action("Aktualni", "Iznajmljivanje")'" />
+    <input class="gumbovi btn btn-default" type="button" value="Prikaži aktualne" onclick="location.href='@Url.Action("Aktualni", "Iznajmljivanje")'" />
 </div>
 <div class="col-md-3">
     <input class="gumbovi btn btn-default" type="button" value="Statistika objekata" onclick="location.href='@Url.Action("StatistikaObjekti", "Iznajmljivanje")'" />
@@ -21,8 +21,8 @@
 <div class="col-md-3">
     <input class="gumbovi btn btn-default" type="button" value="Statistika turista" onclick="location.href='@Url.Action("StatistikaTuristi", "Iznajmljivanje")'" />
 </div>
-    <p>Prikazna je cijela povijest svih turističkih dolazaka</p>
- @{int i = 0; }
+<p>Prikazna je cijela povijest svih turističkih dolazaka</p>
+@{int i = 0; }
 <table class="table table-bordered table-hover">
     <tr>
         <th>
@@ -83,14 +83,22 @@
                 @item.JedinicaIznajmljivanja.DnevnaCijena kn
             </td>
             <td>
-                <a href='@Url.Action("Edit", "Iznajmljivanje", new { sifra_iznajmljivanja = item.sifra_iznajmljivanja,
-                        sifra_turista = item.sifra_turista, sifra_jedinice_iznajljivanja = item.sifra_jedinice_iznajmljivanja})'>
-                <img class="img-thumbnail" src='@Url.Content("../Slike/editing.png" )' /></a>
-                <a data-ajax="true" data-ajax-method="POST" href="/Turist/Delete/@item.sifra_turista">
-                    <img class="img-thumbnail" src='@Url.Content("../Slike/brisanje.png" )' />
-                </a>
+                <center>
+                    <a href='@Url.Action("Edit", "Iznajmljivanje", new
+                         {
+                             sifra_iznajmljivanja = item.sifra_iznajmljivanja,
+                             sifra_turista = item.sifra_turista, sifra_jedinice_iznajmljivanja = item.sifra_jedinice_iznajmljivanja
+                         })'>
+                        <img class="img-thumbnail" src='@Url.Content("../Slike/editing.png")' />
+                    </a>
+                    <a data-ajax="true" data-ajax-method="POST"
+                       href="/Iznajmljivanje/Delete?sifra_iznajmljivanja=@item.sifra_iznajmljivanja&sifra_turista=@item.sifra_turista&sifra_jedinice_iznajmljivanja=@item.sifra_jedinice_iznajmljivanja"
+                       onclick="setTimeout(brisanje, 200);">
+                        <img class="img-thumbnail" src='@Url.Content("../Slike/brisanje.png")' />
+                    </a>
+                </center>
             </td>
         </tr>
     }
 </table>
-    <p>Ukupno zapisa: @i</p>
+<p>Ukupno zapisa: @i</p>

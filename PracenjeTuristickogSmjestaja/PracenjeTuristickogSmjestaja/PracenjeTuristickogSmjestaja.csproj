@@ -269,6 +269,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Scripts\brisanje.js" />
+    <Content Include="Slike\fondovi.gif" />
+    <Content Include="Slike\hrvatskaZastava.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -336,6 +339,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\graf1.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
@@ -345,6 +350,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.canvasjs.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -365,6 +371,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\validacije.js" />
+    <Content Include="Slike\htz.png" />
     <Content Include="Slike\iznajmljivanje.png" />
     <Content Include="Slike\jedinica_iznajmljivanja.png" />
     <Content Include="Slike\kopacki rit.jpg" />
@@ -432,6 +439,11 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Iznajmljivanje\ObjektiGrafovi.cshtml" />
+    <Content Include="Views\Iznajmljivanje\TuristiGrafovi.cshtml" />
+    <Content Include="Views\JedinicaIznajmljivanja\Edit.cshtml" />
+    <Content Include="Views\Vlasnik\Edit.cshtml" />
+    <Content Include="Views\Vlasnistvo\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

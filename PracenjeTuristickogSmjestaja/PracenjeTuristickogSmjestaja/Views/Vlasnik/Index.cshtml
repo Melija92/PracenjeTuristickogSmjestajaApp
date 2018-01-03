@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Index";
 }
+@section scripts{
+
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+}
+<script src="~/Scripts/brisanje.js"></script>
 @{var i = 0; }
 <input class="gumbovi btn btn-default" type="button" value="Dodaj vlasnika" onclick="location.href='@Url.Action("Create", "Vlasnik")'" />
 <table class="table table-bordered table-hover">
@@ -30,6 +36,15 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Drzavljanstvo.NazivDrzavljanstva)
+            </td>
+            <td>
+                <center>
+                    <a href='@Url.Action("Edit", "Vlasnik", new { id = item.sifra_vlasnika })'><img class="img-thumbnail" src='@Url.Content("../Slike/editing.png" )' /></a>
+
+                    <a data-ajax="true" data-ajax-method="POST" href="/Vlasnik/Delete/@item.sifra_vlasnika" onclick="setTimeout(brisanje, 100);">
+                        <img class="img-thumbnail" src='@Url.Content("../Slike/brisanje.png" )' />
+                    </a>
+                </center>
             </td>
         </tr>
     }

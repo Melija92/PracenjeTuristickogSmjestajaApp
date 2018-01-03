@@ -1,0 +1,3 @@
+﻿function brisanje() {
+    location.reload();
+}

@@ -1,0 +1,48 @@
+﻿@using PracenjeTuristickogSmjestaja.ViewModels
+@model JedinicaIznajmljivanjaViewModel
+@{
+    ViewBag.Title = "Jedinica iznajmljivanja";
+}
+
+<div class="row" style="margin-left:10%">
+    <div class="col-md-6">
+        <h3>Izmjena jedinice iznajmljivanja</h3>
+        <p>U unosu nove jedinice potrebno je povezati jedinicu iznajmljivanja s objektom u kojemu se nalazi (hotel, kuća, kamp odredište...)</p>
+        <div class="jumbotron">
+            @using (Html.BeginForm("Edit", "JedinicaIznajmljivanja"))
+            {
+                @Html.HiddenFor(a => a.sifra_jedinice_iznajmljivanja)
+                <div class="form-group">
+                    @Html.LabelFor(a => a.jedinica_iznajmljivanja)
+                    @Html.TextBoxFor(a => a.jedinica_iznajmljivanja, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(a => a.jedinica_iznajmljivanja)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.MaksimalanBrojLjudi)
+                    @Html.TextBoxFor(a => a.MaksimalanBrojLjudi, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(a => a.MaksimalanBrojLjudi)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.DnevnaCijena)
+                    @Html.TextBoxFor(a => a.DnevnaCijena, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.DnevnaCijena)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.RazinaLuksuznosti)
+                    @Html.DropDownListFor(a => a.RazinaLuksuznosti, new SelectList(Enum.GetValues(typeof(Luksuznost))), "Izaberi razinu luksuznosti", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.RazinaLuksuznosti)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.sifra_objekta)
+                    @Html.DropDownList("sifra_objekta", null, "Izaberi objekt", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.sifra_objekta)
+                </div>
+                <button type="submit" value="save" class="btn btn-primary">Spremi</button>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "JedinicaIznajmljivanja")'" />
+        @Html.Partial("~/Views/Shared/Linkovi.cshtml")
+    </div>
+</div>

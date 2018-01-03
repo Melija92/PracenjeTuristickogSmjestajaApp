@@ -50,11 +50,12 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer style="text-align: center;">
-            <p>@DateTime.Now.Year - Praćenje popunjenosti turističkog smještaja</p>
-            <p>Stranica i slike su ilustrativne te služe samo kao primjer web aplikacije u svrhu izrade završnog rada</p>
-            <p>Aplikaciju izradio - Sučić Domagoj</p>
-        </footer>
+            <footer style="text-align: center;">
+                <p>@DateTime.Now.Year - Praćenje popunjenosti turističkog smještaja</p>
+                <p>Stranica i slike su ilustrativne te služe samo kao primjer web aplikacije</p>
+                <p>Aplikaciju izradio - Sučić Domagoj</p>
+            </footer>
+
     </div>
     <script type="text/javascript" src="@Url.Content("/Scripts/validacije.js")"></script>
     @RenderSection("scripts", required: false)

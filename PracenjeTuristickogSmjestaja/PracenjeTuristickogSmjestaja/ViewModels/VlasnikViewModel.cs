@@ -6,6 +6,7 @@ namespace PracenjeTuristickogSmjestaja.ViewModels
 {
     public class VlasnikViewModel
     {
+        public int sifra_vlasnika { get; set; }        
         [Required(ErrorMessage = "OIB je obvezan za unos")]
         [Display(Name = "OIB vlasnika")]
         public string OIB_vlasnika { get; set; }

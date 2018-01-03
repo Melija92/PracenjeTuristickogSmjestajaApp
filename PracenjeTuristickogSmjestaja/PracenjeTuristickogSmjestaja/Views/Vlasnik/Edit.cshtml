@@ -1,0 +1,41 @@
+﻿@model PracenjeTuristickogSmjestaja.ViewModels.VlasnikViewModel
+@{
+    ViewBag.Title = "Vlasnik";
+}
+<div class="row" style="margin-left:10%">
+    <div class="col-md-6">
+        <h3>Uredi vlasnika</h3>
+        <p>Vlasnik je osoba koja ima udio vlasništva nad nekim objektom</p>
+        <div class="jumbotron">
+            @using (Html.BeginForm("Edit", "Vlasnik", FormMethod.Post, new { name = "vlasnik_forma" }))
+            {
+                @Html.HiddenFor(a=>a.sifra_vlasnika)
+                <div class="form-group">
+                    @Html.LabelFor(a => a.OIB_vlasnika)
+                    @Html.TextBoxFor(a => a.OIB_vlasnika, new { @class = "form-control", autofocus = "autofocus", placeholder = "npr. 87481127945" })
+                    @Html.ValidationMessageFor(a => a.OIB_vlasnika)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.Ime)
+                    @Html.TextBoxFor(a => a.Ime, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(a => a.Ime)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.Prezime)
+                    @Html.TextBoxFor(a => a.Prezime, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.Prezime)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.Drzavljanstvo)
+                    @Html.DropDownList("Drzavljanstvo", null, "Izaberi državljanstvo", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(a => a.Drzavljanstvo)
+                </div>
+                <button type="submit" value="save" class="btn btn-primary" onclick="return VlasnikValidacija()">Spremi</button>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "Vlasnik")'" />
+        @Html.Partial("~/Views/Shared/Linkovi.cshtml")
+    </div>
+</div>

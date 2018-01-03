@@ -1,0 +1,81 @@
+﻿@model PracenjeTuristickogSmjestaja.ViewModels.StatistikaViewModel
+@using PracenjeTuristickogSmjestaja.ViewModels
+@{
+    ViewBag.Title = "Grafovi turista";
+}
+<script src="~/Scripts/graf1.js"></script>
+<script src="~/Scripts/jquery-1.11.1.min.js"></script>
+<script src="~/Scripts/jquery.canvasjs.min.js"></script>
+<script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    var spol = [];
+
+    @foreach (var item in Model.Spolovi)
+    {
+        @:spol.push(['@item.nazivSpola', @item.Broj]);
+    };
+    spol.unshift(['', '']);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var spolovi = google.visualization.arrayToDataTable(spol);
+
+        // Optional; add a title and set the width and height of the chart
+        var velicina = { 'width': 550, 'height': 400 };
+
+        // Display the chart inside the <div> element with id="tipOjbekta"
+        var chart = new google.visualization.PieChart(document.getElementById('spol'));
+        chart.draw(spolovi, velicina);
+    }
+</script>
+<script>
+    window.onload = function() {
+        var mjesto = [];
+        @foreach (var item in Model.Mjesta) {
+        @: mjesto.push({ label: '@item.Naziv', y: @item.Broj });
+    }
+        var options1 = {
+            data: [
+                {
+                    type: "column",
+                    dataPoints: mjesto
+                }
+            ]
+        };
+        var drzavljanstvo = [];
+        @foreach (var item in Model.Drzavljanstva) {
+            @: drzavljanstvo.push({ label: '@item.Naziv', y: @item.Broj });
+        }
+        var options2 = {
+            data: [
+                {
+                    type: "column",
+                    dataPoints: drzavljanstvo
+                }
+            ]
+        };
+
+        $("#drzavljanstvo").CanvasJSChart(options2);
+
+        $("#mjesto").CanvasJSChart(options1);
+    };
+</script>
+<div class="col-md-12">
+    <input class="gumbovi btn btn-default" type="button" value="Nazad" onclick="location.href='@Url.Action("StatistikaTuristi", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-12">
+    <h2 style="text-align: left">Spol</h2>
+    <div id="spol"></div>
+</div>
+<div class="col-md-12">
+    <h2 style="text-align: center">Popunjenost po mjestu</h2>
+    <div id="mjesto"></div>
+</div>
+<div class="col-md-12" style="margin-top: 400px;">
+    <h2 style="text-align: center">Državljanstvo</h2>
+    <div id="drzavljanstvo"></div>
+</div>
+

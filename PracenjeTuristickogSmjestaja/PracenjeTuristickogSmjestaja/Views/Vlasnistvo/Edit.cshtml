@@ -1,0 +1,38 @@
+﻿@model PracenjeTuristickogSmjestaja.ViewModels.VlasnistvoViewModel
+@{
+    ViewBag.Title = "Vlasnistvo";
+}
+<div class="row" style="margin-left:10%">
+    <div class="col-md-6">
+        <h3>Uređivanje vlasništva</h3>
+        <p>Prilikom unosom vlasništva, OIB vlasnika povezuje se s šifrom objekta nad kojim ima dio ili poptpuno vlasništvo</p>
+        <div class="jumbotron">
+
+            @using (Html.BeginForm("Edit", "vlasnistvo"))
+            {
+                @Html.HiddenFor(a => a.sifra_vlasnika)
+                @Html.HiddenFor(a => a.sifra_objekta)
+                <div class="form-group">
+                    @Html.LabelFor(a => a.sifra_vlasnika)
+                    @Html.DropDownList("sifra_vlasnika", null, "Izaberi vlasnika", htmlAttributes: new { @class = "form-control", disabled="" })
+                    @Html.ValidationMessageFor(a => a.sifra_vlasnika)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.sifra_objekta)
+                    @Html.DropDownList("sifra_objekta", null, "Izaberi objekt", htmlAttributes: new { @class = "form-control", disabled = "" })
+                    @Html.ValidationMessageFor(a => a.sifra_objekta)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(a => a.UdioUVlasnistvu)
+                    @Html.TextBoxFor(a => a.UdioUVlasnistvu, new { @class = "form-control", type = "number" })
+                    @Html.ValidationMessageFor(a => a.UdioUVlasnistvu)
+                </div>
+                <button type="submit" value="save" class="btn btn-primary">Spremi</button>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <input class="gumbovi btn btn-default" type="button" value="Prikaži sve" onclick="location.href='@Url.Action("Index", "Vlasnistvo")'" />
+        @Html.Partial("~/Views/Shared/Linkovi.cshtml")
+    </div>
+</div>

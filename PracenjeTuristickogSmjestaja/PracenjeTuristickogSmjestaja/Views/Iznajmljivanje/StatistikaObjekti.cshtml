@@ -2,8 +2,7 @@
 @using PracenjeTuristickogSmjestaja.ViewModels
 @{
     ViewBag.Title = "Statistika objekata";
-}
-<div class="col-md-3">
+}<div class="col-md-3">
     <input class="gumbovi btn btn-default" type="button" value="Dodaj iznajmljivanje" onclick="location.href='@Url.Action("Create", "Iznajmljivanje")'" />
 </div>
 <div class="col-md-3">
@@ -15,59 +14,62 @@
 <div class="col-md-3">
     <input class="gumbovi btn btn-default" type="button" value="Statistika turista" onclick="location.href='@Url.Action("StatistikaTuristi", "Iznajmljivanje")'" />
 </div>
+<div style="text-align: center;">
+    <input class="gumbovi btn btn-info btn-lg" type="button" value="Grafički prikazi" onclick="location.href='@Url.Action("ObjektiGrafovi", "Iznajmljivanje")'" />
+</div>
 
 
-    <div class="col-md-3">
-        <p class="opisTablica">Popunjenost po tipu objekta</p>
-        <table class="table table-bordered">
+<div class="col-md-3">
+    <p class="opisTablica">Popunjenost po tipu objekta</p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Naziv mjesta
+            </th>
+            <th>
+                Broj turista
+            </th>
+        </tr>
+        @foreach (var item in Model.TipObjekata)
+        {
             <tr>
-                <th>
-                    Naziv mjesta
-                </th>
-                <th>
-                    Broj turista
-                </th>
+                <td>
+                    @item.Naziv
+                </td>
+                <td>
+                    @item.Broj
+                </td>
             </tr>
-            @foreach (var item in Model.TipObjekata)
-            {
-                <tr>
-                    <td>
-                        @item.Naziv
-                    </td>
-                    <td>
-                        @item.Broj
-                    </td>
-                </tr>
 
-            }
-        </table>
-        <br />
-    </div>
+        }
+    </table>
+    <br/>
+</div>
 
-    <div class="col-md-3">
-        <p class="opisTablica">Popunjenost po vrsti iznajmljivača</p>
-        <table class="table table-bordered">
+<div class="col-md-3">
+    <p class="opisTablica">Popunjenost po vrsti iznajmljivača</p>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Naziv mjesta
+            </th>
+            <th>
+                Broj turista
+            </th>
+        </tr>
+        @foreach (var item in Model.TipIznajmljivaca)
+        {
             <tr>
-                <th>
-                    Naziv mjesta
-                </th>
-                <th>
-                    Broj turista
-                </th>
+                <td>
+                    @item.Naziv
+                </td>
+                <td>
+                    @item.Broj
+                </td>
             </tr>
-            @foreach (var item in Model.TipIznajmljivaca)
-            {
-                <tr>
-                    <td>
-                        @item.Naziv
-                    </td>
-                    <td>
-                        @item.Broj
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+        }
+    </table>
+</div>
 
 @{var trenutnaPopunjenostViewModelZaListu = new List<TrenutnaPopunjenostViewModel>(); }
 @foreach (var item in Model.TrenutnaPopunjenost)
@@ -95,7 +97,7 @@
             </th>
         </tr>
         @foreach (var item in Model.Popunjenost)
-            {
+        {
             <tr>
                 <td>
                     @item.sifra_objekta
@@ -125,7 +127,7 @@
                 }
 
             </tr>
-            }
+        }
     </table>
 </div>
 

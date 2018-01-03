@@ -1,0 +1,121 @@
+﻿@model PracenjeTuristickogSmjestaja.ViewModels.StatistikaViewModel
+@using PracenjeTuristickogSmjestaja.ViewModels
+@{
+    ViewBag.Title = "Grafovi objekata";
+}
+<script src="~/Scripts/graf1.js"></script>
+<script src="~/Scripts/jquery-1.11.1.min.js"></script>
+<script src="~/Scripts/jquery.canvasjs.min.js"></script>
+<script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    var objektiTipObjekta = [];
+    var objektiTipIznajmljivaca = [];
+
+    @foreach (var item in Model.TipObjekata)
+    {
+        @:objektiTipObjekta.push(['@item.Naziv', @item.Broj]);
+    };
+    objektiTipObjekta.unshift(['', '']);
+
+    @foreach (var item in Model.TipIznajmljivaca)
+    {
+        @:objektiTipIznajmljivaca.push(['@item.Naziv', @item.Broj]);
+    };
+    objektiTipIznajmljivaca.unshift(['', '']);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var dataTipObjekta = google.visualization.arrayToDataTable(objektiTipObjekta);
+        var dataTipIznajmljivaca = google.visualization.arrayToDataTable(objektiTipIznajmljivaca);
+
+        // Optional; add a title and set the width and height of the chart
+        var velicina = { 'width': 550, 'height': 400 };
+
+        // Display the chart inside the <div> element with id="tipOjbekta"
+        var chart = new google.visualization.PieChart(document.getElementById('tipOjbekta'));
+        chart.draw(dataTipObjekta, velicina);
+        var chart2 = new google.visualization.PieChart(document.getElementById('tipIznajmljivaca'));
+        chart2.draw(dataTipIznajmljivaca, velicina);
+    }
+</script>
+<script>
+@{var trenutnaPopunjenostViewModelZaListu = new List<TrenutnaPopunjenostViewModel>(); }
+@foreach (var item in Model.TrenutnaPopunjenost)
+{
+    var trenutnaPopunjenostViewModel = new TrenutnaPopunjenostViewModel();
+    trenutnaPopunjenostViewModel.naziv = item.naziv;
+    trenutnaPopunjenostViewModel.trenutnaPopunjenost = item.trenutnaPopunjenost;
+    trenutnaPopunjenostViewModelZaListu.Add(trenutnaPopunjenostViewModel);
+}
+
+    var plaviDio = [];
+    var crveniDio = [];
+@foreach (var item in Model.Popunjenost)
+{
+    foreach (var trenutnaPopunjenost in trenutnaPopunjenostViewModelZaListu)
+     {
+
+         if (item.sifra_objekta == trenutnaPopunjenost.naziv)
+         {
+             @: plaviDio.push({ label: '@item.sifra_objekta', y: @trenutnaPopunjenost.trenutnaPopunjenost });
+             @: crveniDio.push({ y :  (@item.MaxBroj - @trenutnaPopunjenost.trenutnaPopunjenost) });
+         }
+     }
+}
+    window.onload = function () {
+        var options = {
+            animationEnabled: true,
+            title:{
+            },
+            axisY: {
+            suffix: "%"
+            },
+            toolTip: {
+            shared: true,
+                reversed: true
+            },
+            legend: {
+            reversed: true,
+                verticalAlign: "center",
+                horizontalAlign: "right"
+            },
+            data: [
+                {
+            type: "stackedColumn100",
+                    name: "Popunjeno",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0"%"",
+                    dataPoints: plaviDio
+                },
+                {
+            type: "stackedColumn100",
+                    name: "Prazno",
+                    showInLegend: true,
+                    yValueFormatString: "#,##0"%"",
+                    dataPoints: crveniDio
+                }
+            ]
+        };
+
+        $("#objektPopunjenost").CanvasJSChart(options);
+}
+</script>
+<div class="col-md-12">
+    <input class="gumbovi btn btn-default" type="button" value="Nazad" onclick="location.href='@Url.Action("StatistikaObjekti", "Iznajmljivanje")'" />
+</div>
+<div class="col-md-6">
+    <h2 style="text-align: center">Tip objekta</h2>
+    <div id="tipOjbekta"></div>
+</div>
+<div class="col-md-6">
+    <h2 style="text-align: center">Tip iznajmljivača</h2>
+    <div id="tipIznajmljivaca"></div>
+</div>
+<div class="col-md-12">
+    <h2 style="text-align: center">Popunjenost objekata (prazni nisu prikazani)</h2>
+    <div id="objektPopunjenost" style="height: 370px; width: 100%;"></div>
+</div>
+

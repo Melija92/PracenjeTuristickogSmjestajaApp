@@ -6,10 +6,9 @@ namespace PracenjeTuristickogSmjestaja.ViewModels
 {
     public class VlasnistvoViewModel
     {
-        [Display(Name = "Vlasnika")]
+        [Display(Name = "Vlasnik")]
         [Required(ErrorMessage = "OIB je obvezan za unos")]
-        [StringLength(11, MinimumLength = 11, ErrorMessage = "OIB mora sadržavati točno 11 znakova")]
-        public int OIB_v { get; set; }
+        public int sifra_vlasnika { get; set; }
 
         public IEnumerable<Vlasnik> Vlasnici { get; set; }
 

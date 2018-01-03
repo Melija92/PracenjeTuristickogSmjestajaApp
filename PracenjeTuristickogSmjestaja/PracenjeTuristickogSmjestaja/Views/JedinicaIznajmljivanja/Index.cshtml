@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Jedinice iznajmljivanja";
 }
+@section scripts{
+
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+}
+<script src="~/Scripts/brisanje.js"></script>
 <input class="gumbovi btn btn-default" type="button" value="Dodaj jedinicu iznajmljivanja" onclick="location.href='@Url.Action("Create", "JedinicaIznajmljivanja")'" />
 @{var i = 0; }
 <table class="table table-bordered table-hover">
@@ -48,6 +54,15 @@
             </td>
             <td>
                 @item.RazinaLuksuznosti
+            </td>
+            <td>
+                <center>
+                    <a href='@Url.Action("Edit", "JedinicaIznajmljivanja", new { id = item.sifra_jedinice_iznajmljivanja })'><img class="img-thumbnail" src='@Url.Content("../Slike/editing.png" )' /></a>
+
+                    <a data-ajax="true" data-ajax-method="POST" href="/JedinicaIznajmljivanja/Delete/@item.sifra_jedinice_iznajmljivanja" onclick="setTimeout(brisanje, 200);">
+                        <img class="img-thumbnail" src='@Url.Content("../Slike/brisanje.png" )' />
+                    </a>
+                </center>
             </td>
         </tr>
     }
